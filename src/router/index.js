@@ -5,7 +5,13 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    beforeEnter: (to, from, next) => {
+      // 지역가드
+      console.log("local: ", to, from);
+
+      next();
+    }
   },
   {
     path: "/courses_1",
@@ -37,6 +43,13 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  // 전역가드
+  console.log("global: ", to, from);
+
+  next();
 });
 
 export default router;
